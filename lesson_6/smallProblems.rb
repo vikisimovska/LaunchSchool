@@ -168,4 +168,53 @@ def stringy(n, zero = 1)
 end
 #puts stringy(6) == '101010'
 
-#8.
+#8.Write a method that takes one argument, an array containing integers, and
+#returns the average of all numbers in the array. The array will never be empty
+#and the numbers will always be positive integers.
+def average(arr)
+  arr.reduce(:+)/arr.size
+end
+
+#SIMILAR SOLUTION WITH SUM AND COUNT, INSTEAD OF REDUCE AND SIZE!!
+def average(arr)
+  arr.sum/arr.count
+end
+
+#puts average([1, 5, 87, 45, 8, 8]) == 25
+#9.Write a method that takes one argument, a positive integer, and returns the
+#sum of its digits.
+def sum(num)
+   num.to_s.scan(/\d+/)
+   arr.map { |str| str.to_i }.sum
+end
+def sum(number)
+ number.to_s.chars.reduce(0) { |sum, digit| sum += digit.to_i }
+end
+def sum(num)
+  num.to_s.chars.map(&:to_i).reduce(:+)
+end
+def sum(int)
+  digits = int.to_s.split('').reduce {|sum, num| sum.to_i + num.to_i}
+end
+def sum(number)
+number.digits.sum
+end
+def sum(int)
+  return int if int.to_s.size <= 1
+  int, remainder = int.divmod(10)
+  remainder + sum(int)
+end
+# puts sum(496) == 19
+# puts sum(123_456_789) == 45
+
+#10.Write a method that takes two arguments, a positive integer and a boolean,
+#and calculates the bonus for a given salary. If the boolean is true, the bonus
+#should be half of the salary. If the boolean is false, the bonus should be 0.
+def calculate_bonus(num, bool)
+  bool == true ? num/2 : 0
+end
+
+#puts calculate_bonus(2800, true) == 1400
+#puts calculate_bonus(1000, false) == 0
+
+#********************************E A S Y 2 ************************************
