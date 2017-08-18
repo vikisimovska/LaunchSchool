@@ -97,23 +97,75 @@ end
 # and returns the given string with all five or more letter words reversed. Each
 # string will consist of only letters and spaces. Spaces should be included only
  #when more than one word is present.
+#version 1
+# def reverse_words(str)
+#   result = ''
+#   str.split.each do |word|
+#     if str.size > 1
+#       if word.size >= 5
+#          result += word.reverse + ' '
+#        else
+#          result += word + ' '
+#        end
+#      else
+#        result = str.reverse
+#      end
+#   end
+#   result
+# end
+
+#version 2
+# def reverse_words(sentence)
+#   sentence.split(' ').map do |word|
+#     if word.length >= 5
+#       word.reverse
+#     else
+#       word
+#     end
+#   end.join(' ')
+# end
+
+#GREAT VERSION COMPARABLE TO THE PREVIOUS ONE!!!
+def reverse_words(string)
+    string.split.map{ |word| word.length > 4 ? word.reverse : word }.join(' ')
+end
+#UNIQE SOLUTION!!
 def reverse_words(str)
-  result = ''
-  str.split.each do |word|
-    if str.size > 1
-      if word.size >= 5
-         result += word.reverse + ' '
-       else
-         result += word + ' '
-       end
-     else
-       result = str.reverse
-     end
-  end
-  result
+  str.gsub(/\w{5,}/, &:reverse)
+end
+# GREAT VERSION - version 3
+def reverse_words(string)
+  string.split.each { |item| item.reverse! if item.size >= 5 }.join(' ')
 end
 
+# puts reverse_words('Professional')          # => lanoisseforP
+# puts reverse_words('Walk around the block') # => Walk dnuora the kcolb
+# puts reverse_words('Launch School')         # => hcnuaL loohcS
 
-puts reverse_words('Professional')          # => lanoisseforP
-puts reverse_words('Walk around the block') # => Walk dnuora the kcolb
-puts reverse_words('Launch School')         # => hcnuaL loohcS
+#7.Write a method that takes one argument, a positive integer, and returns a
+#string of alternating 1s and 0s, always starting with 1. The length of the
+#string should match the given integer.
+
+def stringy(num)
+  str = ''
+  num.times{ |i| i.even? ? str += '1' : str += '0'}
+  str
+end
+#SIMILAR SOLUTIONS
+def stringy(num)
+  str = ''
+  (1..num).each{ |n| n.odd? ? str << '1' : str << '0' }
+  str
+end
+#UNIQ SOLUTION
+def stringy(size)
+  numbers = Array.new(size)
+  numbers.fill { |i| i.even? ? 1 : 0 }.join
+end
+
+def stringy(n, zero = 1)
+  ("#{zero == 1 ? '10' : '01' }" * n)[0, n]
+end
+#puts stringy(6) == '101010'
+
+#8.
