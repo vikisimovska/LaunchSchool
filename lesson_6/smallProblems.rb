@@ -79,18 +79,41 @@ end
 # end
 
 #def reverse_sentence(str, new_arr = [])
-  arr = str.split
-  arr.each { |word| new_arr.unshift(word)}
-  new_arr.join(' ')
-end
+#   arr = str.split
+#   arr.each { |word| new_arr.unshift(word)}
+#   new_arr.join(' ')
+# end
 
 #version 3
 def reverse_sentence(str, new_arr = [])
   a = str.split
   new_arr << a.pop until a.empty?
-  p new_arr.join(' ')
+  new_arr.join(' ')
 end
 
 #p reverse_sentence('Reverse these words') == 'words these Reverse'
 
-#6.
+#6.Write a method that takes one argument, a string containing one or more words
+# and returns the given string with all five or more letter words reversed. Each
+# string will consist of only letters and spaces. Spaces should be included only
+ #when more than one word is present.
+def reverse_words(str)
+  result = ''
+  str.split.each do |word|
+    if str.size > 1
+      if word.size >= 5
+         result += word.reverse + ' '
+       else
+         result += word + ' '
+       end
+     else
+       result = str.reverse
+     end
+  end
+  result
+end
+
+
+puts reverse_words('Professional')          # => lanoisseforP
+puts reverse_words('Walk around the block') # => Walk dnuora the kcolb
+puts reverse_words('Launch School')         # => hcnuaL loohcS
