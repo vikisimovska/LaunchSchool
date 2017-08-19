@@ -218,3 +218,122 @@ end
 #puts calculate_bonus(1000, false) == 0
 
 #********************************E A S Y 2 ************************************
+#1.Build a program that randomly generates and prints Teddy's age. To get the age
+ #you should generate a random number between 20 and 200.
+# puts "Teddy is #{(20..200).to_a.sample} years old!"
+#Teddy is 69 years old!
+
+#2VERSION..you can use rand directly on range obj, sample had to be used on arr
+age = rand(20..200)
+#puts "Teddy is #{age} years old!"
+
+#2.Build a program that asks a user for the length and width of a room in meters
+# and then displays the area of the room in both square meters and square feet.
+
+# puts "Enter the length of the room in meters:"
+# length = gets.chomp.to_i
+# puts "Enter the width of the room in meters:"
+# width = gets.chomp.to_i
+# result = length * width
+# p "The area of the room is #{result.to_f} square meters (#{result*10.7639} square feet)."
+
+#IMPROVED VERSION
+# SQMETERS_TO_SQFEET = 10.7639
+#
+# puts '==> Enter the length of the room in meters: '
+# length = gets.to_f
+#
+# puts '==> Enter the width of the room in meters: '
+# width = gets.to_f
+#
+# square_meters = (length * width).round(2)
+# square_feet = (square_meters * SQMETERS_TO_SQFEET).round(2)
+#
+# puts "The area of the room is #{square_meters} " + \
+#      "square meters (#{square_feet} square feet)."
+
+#3.Create a simple tip calculator. The program should prompt for a bill amount
+#and a tip rate. The program must compute the tip and then display both the tip
+# and the total amount of the bill.
+# puts "What is the bill?"
+# bill = gets.chomp.to_f
+#
+# puts "What is the tip percentage?"
+# tip_percent = gets.chomp.to_f
+#
+# tip = (bill * tip_percent)/100
+#
+# puts "The tip is #{tip.round(2)}"
+# puts "The total is #{bill + tip}"
+
+#ANOTHER VERSION THAT CHECKS VALIDATION
+# puts "--What is the total of the bill?"
+# bill = gets.chomp
+# until valid_number?(bill)
+#   puts "--Please enter a valid number:"
+#   bill = gets.chomp
+# end
+
+#4.Build a program that displays when the user will retire and how many years
+#she has to work till retirement.
+
+# puts "What is your age?"
+# age = gets.chomp.to_i
+# puts "At what age would you like to retire?"
+# retire = gets.chomp.to_i
+#
+# years_to_work = retire - age
+# puts "It's 2017. You will retire in #{2017 + years_to_work}."
+# puts "You have only #{retire - age} years of work to go!"
+
+#updated version using current_year = Time.now.year
+
+#5.Write a program that will ask for user's name. The program will then greet
+#the user. If the user writes "name!" then the computer yells back to the user.
+# puts "What is your name?"
+# name = gets.chomp
+# if (name[-1] != '!')
+#    puts "Hello #{name}."
+#  else
+#    puts "HELLO #{name.upcase}. WHY ARE WE SCREAMING?"
+#  end
+#UPDATED VERSION
+#name.end_with?("!")
+#??? name, exclamation = name.partition('!')
+
+#6.Print all odd numbers from 1 to 99, inclusive. All numbers should be printed
+# on separate lines.
+#(1..99).each { |num| puts num if num.odd?}
+#1.upto(99) { |num| puts num if num.odd? }
+#100.times { |num| puts num if num.odd? }
+#puts (1..99).reject{ |i| i.even? }
+#puts (1..99).select{ |i| i.odd? }
+#puts 1.step(by: 2, to: 99).to_a .. start from 1 up to 99, by 2
+
+#7.Print the even numbers from 1 to 99, inclusive. All numbers should be printed
+# on separate lines.
+# (1..99).each { |num| puts num if num.even?}
+#puts 1.upto(99).select(&:even?)
+
+#8. Write a program that asks the user to enter an integer greater than 0, then
+# asks if the user wants to determine the sum or product of all numbers between
+# 1 and the entered integer.
+
+# puts "Please enter an integer greater than 0:"
+# num = gets.chomp.to_i
+#
+# puts "Enter 's' to compute the sum, 'p' to compute the product."
+# computation = gets.chomp
+#
+# if computation == 's'
+#   puts "The sum of the integers between 1 and #{num} is #{(1..num).sum}."
+# elsif computation == 'p'
+#   puts "The product of the integers between 1 and #{num} is #{(1..num).reduce(:*)}."
+# end
+
+#version 2..check out the sum and how it works with any enumerable method
+# def compute_sum(number)
+#   total = 0
+#   1.upto(number) { |value| total += value }
+#   total
+# end
