@@ -111,24 +111,56 @@ end
 # p leap_year?(100) == true
 # p leap_year?(400) == true
 
-#5.
+#5.Write a method that searches for all multiples of 3 or 5 that lie between 1
+#and some other number, and then computes the sum of those multiples. For instance
+#if the supplied number is 20, the result should be
+#98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
 
+def multisum(num)
+  arr = []
+  1.upto(num){ |i| arr << i if i % 3 == 0 || i % 5 == 0}
+  arr.sum
+end
 
+# p multisum(3) == 3
+# p multisum(5) == 8
+# p multisum(10) == 33
+# p multisum(1000) == 234168
 
+#6.Write a method that takes an Array of numbers, and returns an Array with the
+#same number of elements, and each element has the running total from the origi
+def running_total(arr)
+  arr.map!.with_index do |e, idx|
+    idx > 0 ? e + arr[idx - 1] : e
+  end
+end
 
+def running_total(arr)
+  sum = 0
+  arr.map! { |num| sum += num }
+end
 
+def running_total_1(array)
+  sum = 0
+  arr = array.each_with_object([]) { |num, arr| arr << sum += num }
+end
 
+def running_total(array)
+    array.map.with_index do |num, index|
+        array[0..index].reduce(:+)
+    end
+end
+def running_total(arr)
+  (1..arr.size).map { |amount| arr.take(amount).reduce(:+) }
+end
 
+def running_total(nums)
+  nums.reduce([]) { |result, n| result + [result.last.to_i + n] }
+end
 
+#p running_total([2, 5, 13]) #== [2, 7, 20]
+#p running_total([14, 11, 7, 15, 20]) #== [14, 25, 32, 47, 67]
+# p running_total([3]) == [3]
+# p running_total([]) == []
 
-
-
-
-
-
-
-
-
-
-
- 
+#7.
