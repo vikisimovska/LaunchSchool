@@ -169,13 +169,84 @@ def crunch(str)
   new_str
 end
 
+#OTHER SOLUTIONS
+def crunch(str)
+  str.tr_s(' -z', ' -z')
+end
+
+def crunch(str)
+  str.scan(/(.)(?!\1+)/).join
+end
+
+def crunch(str)
+  str.chars.chunk(&:itself).map(&:first).join
+end
+
+def crunch(str)
+  str.chars.select.with_index(1) { |char, idx| char != str[idx] }.join
+end
+
+def crunch(str)
+  str.each_char.reduce('') { |res, char | char == res[-1] ? res : res + char }
+end
+def crunch(string)
+  p string.chars.chunk{|s| s}.map(&:first).join
+end
+
+def crunch(input_str)
+  ary = []
+  input_ary = input_str.chars
+  input_ary.select {|char| ary << char unless char == ary.last}.join
+end
+
+def crunch(str)
+  arr = str.chars
+  arr.select.with_index {|v, idx| v unless v == arr[idx+1] }.join
+end
+
+def crunch(str)
+  crunched = []
+  str.chars.each_with_index do |x, i|
+    crunched << x if str[i] != str[i + 1]
+  end
+  crunched.join
+end
+
+#I thought at first that a solution with map would require us to use compact to
+# take care of nil values. But actually, join takes care of nils automatically,
+
+#So the following works:
+
+def crunch(string)
+  (0...string.size).map do |index|
+    string[index] unless string[index] == string[index + 1]
+  end.join
+end
+
 # p crunch('ddaaiillyy ddoouubbllee') == 'daily double'
 # p crunch('4444abcabccba') == '4abcabcba'
 # p crunch('ggggggggggggggg') == 'g'
 # p crunch('a') == 'a'
 # p crunch('') == ''
 
-#OTHER SOLUTIONS
-def crunch(string)
-  string.chars.chunk{|s| s}.map(&:first).join
+#8.Write a method that will take a short line of text, and print it within a box.
+def print_in_box(str)
+  p "+-#{'-' * (str.size)}-+"
+  p "| #{' ' * (str.size)} |"
+  p "| #{str} |"
+  p "| #{' ' * (str.size)} |"
+  p "+-#{'-' * (str.size)}-+"
 end
+
+#print_in_box('To boldly go where no one has gone before.')
+# +--------------------------------------------+
+# |                                            |
+# | To boldly go where no one has gone before. |
+# |                                            |
+# +--------------------------------------------+
+#print_in_box('')
+# +--+
+# |  |
+# |  |
+# |  |
+# +--+
