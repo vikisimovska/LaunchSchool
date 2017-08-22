@@ -86,7 +86,7 @@ end
 #4.Write a method that takes a string with one or more space separated words and
 # returns a hash that shows the number of words of different sizes.
 #Words consist of any string of characters that do not include a space.
-def word_sizes(str)
+def word_sizes1(str)
   hash = Hash.new(0)
   str.split.each do |word|
     hash[word.size] += 1
@@ -99,4 +99,83 @@ end
 # p word_sizes("What's up doc?") == { 6 => 1, 2 => 1, 4 => 1 }
 # p word_sizes('') == {}
 
-#5.
+#5. Modify the word_sizes method from the previous exercise to exclude non-lette
+# when determining word size. For instance, the length of "it's" is 3, not 4.
+def word_sizes(str)
+  s = str.delete(",'!?.")
+  word_sizes1(s)
+end
+
+# p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 2 }
+# p word_sizes('Hey diddle diddle, the cat and the fiddle!') == { 3 => 5, 6 => 3 }
+# p word_sizes("What's up doc?") == { 5 => 1, 2 => 1, 3 => 1 }
+# p word_sizes('') == {}
+
+#6.Write a method that takes an Array of Integers between 0 and 19, and returns
+#an Array of those Integers sorted based on the English words for each number:
+#zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve,
+# thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen
+def alphabetic_number_sort(arr)
+  names = ["zero", "one", "two", "three", "four", "five", "six", "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+
+   hash = {}
+   names.each_with_index do |name, i|
+     hash[name] = i
+   end
+   #h = hash.sort_by{ |k, v| v }.to_h.keys
+   hash.sort.to_h.values
+end
+
+# alphabetic_number_sort((0..19).to_a) == [8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7,
+#  17, 6, 16, 10, 13, 3, 12, 2, 0]
+#OTHER SOLUTIONS
+def alphabetic_number_sort(arr)
+  nums = %w(zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen)
+  nums.each_with_index.each_with_object({}) { |(e, i), h| h[e] = i }.sort.to_h.values
+end
+
+ HASH = { 0 => "zero", 1 => "one", 2 => "two", 3 => "three", 4 => "four",
+            5 => "five", 6 => "six", 7 => "seven", 8 => "eight", 9 => "nine",
+            10 => "ten", 11 => "eleven", 12 => "twelve", 13 => "thirteen",
+            14 => "fourteen", 15 => "fifteen", 16 => "sixteen",
+            17 => "seventeen", 18 => "eighteen", 19 => "nineteen" }
+
+ def alphabetic_number_sort(array)
+   q = array.sort { |a, b| HASH[b] <=> HASH[a] }
+ end
+
+ #7.Write a method that takes a string argument and returns a new string that
+ #contains the value of the original string with all consecutive duplicate
+ #characters collapsed into a single character.
+ #You may not use String#squeeze or String#squeeze!.
+
+#SQUEEZE removes all the dulicate letters that are next to each other!!
+# def crunch(str)
+#   str.squeeze
+# end
+def crunch(str)
+  new_str=""
+  i=0
+  while i < str.size
+    if str[i] == str[i+1] && str[i+1] != nil
+      i += 1
+    else
+      new_str += str[i]
+      i += 1
+    end
+  end
+  new_str
+end
+
+# p crunch('ddaaiillyy ddoouubbllee') == 'daily double'
+# p crunch('4444abcabccba') == '4abcabcba'
+# p crunch('ggggggggggggggg') == 'g'
+# p crunch('a') == 'a'
+# p crunch('') == ''
+
+#OTHER SOLUTIONS
+def crunch(string)
+  string.chars.chunk{|s| s}.map(&:first).join
+end
