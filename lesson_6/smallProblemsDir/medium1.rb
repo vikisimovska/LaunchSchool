@@ -47,3 +47,4 @@ end
 # p rotate_rightmost_digits(735291, 6) == 352917
 
 #CHECK THE REST OF THE SOLUTIONS!!!
+#3.
