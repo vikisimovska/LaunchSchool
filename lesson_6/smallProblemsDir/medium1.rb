@@ -25,6 +25,7 @@ end
 def rotate_array(arr)
   [*arr[1..-1], *arr.first]
 end
+
 # # p rotate_array([7, 3, 5, 2, 9, 1]) == [3, 5, 2, 9, 1, 7]
 # # p rotate_array(['a', 'b', 'c']) == ['b', 'c', 'a']
 # # p rotate_array(['a']) == ['a']
@@ -74,6 +75,11 @@ def max_rotation(num)
     end
   end
    return result.join.to_i
+end
+
+#CRAZY SOLUTION
+def max_rotation(x)
+  (0...x.to_s.size).reduce(x.to_s) { |x, n| x[0...n] + x[n + 1..-1] + x[n] }.to_i
 end
 
 # p max_rotation(735291) == 321579
