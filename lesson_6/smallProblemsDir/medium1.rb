@@ -3,28 +3,28 @@ system("clear")
 #
 # #1.Write a method that rotates an array by moving the first element to the end
 # #of the array. The original array should not be modified.
-# def rotate_array(array)
-#   arr = array.dup
-#   p arr.push(arr.shift)
-# end
-# #BETTER VERSION THEN ABOVE!!
-# def rotate_array(arr)
-#   array = arr.dup
-#   array << array.shift
-# end
-# def rotate_array(array)
-#   array[1..-1] + [array[0]]
-# end
-# def rotate_array(arr)
-#   arr[1..-1] << arr.first
-# en
-# def rotate_array(array)
-#   first, *remainder = array
-#   remainder + [first]
-# end
-# def rotate_array(arr)
-#   [*arr[1..-1], *arr.first]
-# end
+def rotate_array(array)
+  arr = array.dup
+  p arr.push(arr.shift)
+end
+#BETTER VERSION THEN ABOVE!!
+def rotate_array(arr)
+  array = arr.dup
+  array << array.shift
+end
+def rotate_array(array)
+  array[1..-1] + [array[0]]
+end
+def rotate_array(arr)
+  arr[1..-1] << arr.first
+en
+def rotate_array(array)
+  first, *remainder = array
+  remainder + [first]
+end
+def rotate_array(arr)
+  [*arr[1..-1], *arr.first]
+end
 # # p rotate_array([7, 3, 5, 2, 9, 1]) == [3, 5, 2, 9, 1, 7]
 # # p rotate_array(['a', 'b', 'c']) == ['b', 'c', 'a']
 # # p rotate_array(['a']) == ['a']
@@ -76,8 +76,8 @@ def max_rotation(num)
    return result.join.to_i
 end
 
-p max_rotation(735291) == 321579
-p max_rotation(3) == 3
-p max_rotation(35) == 53
-p max_rotation(105) == 15 # the leading zero gets dropped
-p max_rotation(8_703_529_146) == 7_321_609_845
+# p max_rotation(735291) == 321579
+# p max_rotation(3) == 3
+# p max_rotation(35) == 53
+# p max_rotation(105) == 15 # the leading zero gets dropped
+# p max_rotation(8_703_529_146) == 7_321_609_845
