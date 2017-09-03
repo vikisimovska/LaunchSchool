@@ -127,7 +127,7 @@ end
 def diamond(n)
   s = ""
   odd_array = (1..n).select{|num| num.odd?}
-  p odd_array = odd_array + odd_array.reverse[1..-1]#1,3,5,7,9,7,5,3,1
+  odd_array = odd_array + odd_array.reverse[1..-1]#1,3,5,7,9,7,5,3,1
   (0...n).each do |i| #0,1,2,3,4,5,6,7,8
     empty_spaces = n/2
     odd_array[i].times do |j|#1,3,5,7,9,7,5,3,1
@@ -138,4 +138,24 @@ def diamond(n)
   end
 end
 
-diamond(9)
+#CRAZY SOLUTION!!!!!!!!!!!!!!
+def diamond(n)
+  [*(1...n), *n.downto(1)].each { |i| puts ('*' * i).center(n) if i.odd? }
+end
+
+#diamond(9)
+
+#BETTER SOLUTION
+def print_row(grid_size, distance_from_center)
+  number_of_stars = grid_size - 2 * distance_from_center
+  stars = '*' * number_of_stars
+  puts stars.center(grid_size)
+end
+
+def diamond(grid_size)
+  max_distance = (grid_size - 1) / 2
+  max_distance.downto(0) { |distance| print_row(grid_size, distance) }
+  1.upto(max_distance)   { |distance| print_row(grid_size, distance) }
+end
+
+#6.
