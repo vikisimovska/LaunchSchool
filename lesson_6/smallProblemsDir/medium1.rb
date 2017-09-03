@@ -17,7 +17,7 @@ def rotate_array(array)
 end
 def rotate_array(arr)
   arr[1..-1] << arr.first
-en
+end
 def rotate_array(array)
   first, *remainder = array
   remainder + [first]
@@ -76,8 +76,8 @@ def max_rotation(num)
   end
    return result.join.to_i
 end
-
-#CRAZY SOLUTION
+#
+# #CRAZY SOLUTION
 def max_rotation(x)
   (0...x.to_s.size).reduce(x.to_s) { |x, n| x[0...n] + x[n + 1..-1] + x[n] }.to_i
 end
@@ -95,13 +95,16 @@ end
 #and keep going until you have been through 1000 repetitions of this process.
 
 #Write a program that determines which lights are on at the end.
-hash = Hash.new
-1.times do |i|
-  hash["switch"] = "on"
+switches = {}
+ (1..1000).each do |switch_num|
+   switches[switch_num] = false
  end
- 
-
-
+ (1..1000).each do |pass|
+   switches.each do |num, _|
+     switches[num] = !switches[num] if num % pass == 0
+   end
+ end
+ p switches.keys.select{|k| switches[k] == true}
 
 #
 #round 1: every light is turned on
