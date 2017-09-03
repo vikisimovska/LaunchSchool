@@ -104,8 +104,12 @@ switches = {}
      switches[num] = !switches[num] if num % pass == 0
    end
  end
- p switches.keys.select{|k| switches[k] == true}
+ switches.keys.select{|k| switches[k] == true}
 
+#CRAZY SOLUTION
+def lights(num)
+  (1..num**0.5).map(&:abs2)
+end
 #
 #round 1: every light is turned on
 #round 2: lights 2 and 4 are now off; 1, 3, 5 are on
@@ -115,3 +119,23 @@ switches = {}
 #The result is that 2 lights are left on, lights 1 and 4.
 
 #With 10 lights, 3 lights are left on: lights 1, 4, and 9.
+
+#5.Write a method that displays a 4-pointed diamond in an n x n grid, where n is
+# an odd integer that is supplied as an argument to the method. You may assume
+# that the argument will always be an odd integer.
+
+def diamond(n)
+  s = ""
+  odd_array = (1..n).select{|num| num.odd?}
+  p odd_array = odd_array + odd_array.reverse[1..-1]#1,3,5,7,9,7,5,3,1
+  (0...n).each do |i| #0,1,2,3,4,5,6,7,8
+    empty_spaces = n/2
+    odd_array[i].times do |j|#1,3,5,7,9,7,5,3,1
+      s = (" " * (empty_spaces-i).abs) + ("*" * (j+1)) + (" " * (empty_spaces-i).abs)
+    end
+    p s
+    s=""
+  end
+end
+
+diamond(9)
