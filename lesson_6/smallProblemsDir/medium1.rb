@@ -77,7 +77,7 @@ def max_rotation(num)
    return result.join.to_i
 end
 #
-# #CRAZY SOLUTION
+# #GREAT SOLUTION
 def max_rotation(x)
   (0...x.to_s.size).reduce(x.to_s) { |x, n| x[0...n] + x[n + 1..-1] + x[n] }.to_i
 end
@@ -106,7 +106,7 @@ switches = {}
  end
  switches.keys.select{|k| switches[k] == true}
 
-#CRAZY SOLUTION
+#GREAT SOLUTION
 def lights(num)
   (1..num**0.5).map(&:abs2)
 end
@@ -138,7 +138,7 @@ def diamond(n)
   end
 end
 
-#CRAZY SOLUTION!!!!!!!!!!!!!!
+#GREAT SOLUTION!!!!!!!!!!!!!!
 def diamond(n)
   [*(1...n), *n.downto(1)].each { |i| puts ('*' * i).center(n) if i.odd? }
 end
@@ -158,4 +158,37 @@ def diamond(grid_size)
   1.upto(max_distance)   { |distance| print_row(grid_size, distance) }
 end
 
-#6.
+#6.Stack Machine Interpretation
+
+def minilang(str)
+  arr = str.split
+  reg = 0
+  stack = []
+
+  arr.each do |command|
+    case command
+    when command =~ /\d/
+      reg = command.to_i
+    when "PUSH"
+      stack.push(reg)
+    when "ADD"
+      reg += stack.pop
+    when "SUB"
+      reg -= stack.pop
+    when "MULT"
+      reg *= stack.pop
+    when "DIV"
+      reg /= stack.pop
+    when "MOD"
+      reg %= stack.pop
+    when "POP"
+      reg = stack.pop
+    when "PRINT"
+      p reg
+    else
+        #reg = command.to_i
+    end
+  end
+
+end
+ minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT')
