@@ -167,7 +167,7 @@ def minilang(str)
 
   arr.each do |command|
     case command
-    when command =~ /\d/
+    when /\d/
       reg = command.to_i
     when "PUSH"
       stack.push(reg)
@@ -184,11 +184,149 @@ def minilang(str)
     when "POP"
       reg = stack.pop
     when "PRINT"
-      p reg
+       reg
     else
         #reg = command.to_i
     end
   end
 
 end
- minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT')
+ #p minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT')
+
+#LOOK IT UP AGAIN!!
+ #7.Write a method that takes a sentence string as input, and returns the same
+ #string with any sequence of the words 'zero', 'one', 'two', 'three', 'four',
+ #'five', 'six', 'seven', 'eight', 'nine' converted to a string of digits.
+ def word_to_digit(words)
+    hash ={
+      'zero'  => "0",
+      'one'   => "1",
+      'two'   => "2",
+      'three' => "3",
+      'four'  => "4",
+      'five'  => "5",
+      'six'   => "6",
+      'seven' => "7",
+      'eight' => "8",
+      'nine'  => "9"
+   }
+#    #words.delete(".").split(" ").each{|s| words.gsub!(s, hash[s]) if hash.keys.include?(s)}
+#    #WORK OF A GINIUS!!!!!!!
+    words.split(/\b/).map { |word| hash[word] || word }.join(" ")
+   return words
+end
+#****************************************************************************
+DIGIT_STRINGS = { "zero"  => "0", "one"  => "1", "two" => "2", "three" =>  "3",
+                  "four"  => "4", "five" => "5", "six" => "6", "seven" =>  "7",
+                  "eight" => "8", "nine" => "9" }
+
+def word_to_digit(string)
+  string.split(/\b/).map do |word|
+    p word
+    DIGIT_STRINGS[word] || word
+  end.join
+end
+#****************************************************************************
+#AMAZING!!!!!LOOK UP THE  /\w+/ one or many word chars
+DIGITS = %w[zero one two three four five six seven eight nine]
+def word_to_digit(str)
+  str.gsub(/\w+/) do |word|
+    p word
+    DIGITS.index(word) || word
+  end
+end
+
+#p word_to_digi('Please call me at five five five one two three four. Thanks.') #== 'Please call me at 5 5 5 1 2 3 4. Thanks.' 2 3 4. Thanks.'
+
+#8.Fibonacci Numbers (Recursion)
+
+def fibonacci(n)
+  return 1 if n == 1 || n == 2
+  fibonacci(n - 1) + fibonacci(n - 2)
+end
+
+# p fibonacci(1) == 1
+# p fibonacci(2) == 1
+# p fibonacci(3) == 2
+# p fibonacci(4) == 3
+# p fibonacci(5) == 5
+# p fibonacci(12) == 144
+# p fibonacci(20) == 6765
+
+#9.Rewrite your recursive fibonacci method so that it computes its results without recursion.
+def fibonacci2(n)
+  sum = 1
+  first_prev = 1
+  second_prev = 1
+  3.upto(n) do |num|
+    sum = first_prev + second_prev
+    first_prev = second_prev
+    second_prev = sum
+  end
+  sum
+end
+
+#SECOND SOLUTION
+def fibonacci(nth)
+  first, last = [1, 1]
+  3.upto(nth) do
+    first, last = [last, first + last]
+  end
+  last
+end
+#THIRD SOLUTION
+def fibonacci(n)
+    arr = [1,1]
+    while arr.size < n
+        sum = arr[-1] + arr[-2]
+        arr.push(sum)
+    end
+    arr[n-1]
+end
+#N - SOLUTION
+def fibonacci(n)
+  (3..n).reduce([1, 1]) { |(a, b), _| [b, a + b] }.last
+end
+#USING Enumerator
+def fibonacci(n)
+  fib = Enumerator.new do |y|
+    a = b = 1
+    loop do
+      y << a
+      a, b = b, a + b
+    end
+  end
+  fib.take(n).last
+end
+# p fibonacci2(20) == 6765
+# p fibonacci2(100) == 354224848179261915075
+
+#10.In this exercise, you are going to compute a method that returns the last
+#digit of the nth Fibonacci number.
+def fibonacci_last(n)
+  num = fibonacci(n)
+  num.to_s[-1].to_i
+end
+
+#PART 2
+#To compute the last digit of the nth Fibonacci number, you only need the last
+#digit of the nth - 1 and nth -2 numbers. As a result, you only ever need the
+#last digit of any intermediate result, which eliminates all of the computing
+#effort needed to compute the massive numbers involved. Our second solution does
+#exactly this: it only computes and uses the last digit in each intermediate
+#result, and computes the last digit of the 123,456,789th Fibonacci number in
+#less than a minute.
+
+def fibonacci_last(nth)
+  last_2 = [1, 1]
+  3.upto(nth) do
+    last_2 = [last_2.last, (last_2.first + last_2.last) % 10]
+  end
+  last_2.last
+end
+# p fibonacci_last(15)        # -> 0  (the 15th Fibonacci number is 610)
+# p fibonacci_last(20)        # -> 5 (the 20th Fibonacci number is 6765)
+# p fibonacci_last(100)       # -> 5 (the 100th Fibonacci number is 354224848179261915075)
+# p fibonacci_last(100_001)   # -> 1 (this is a 20899 digit number)
+# p fibonacci_last(1_000_007) # -> 3 (this is a 208989 digit number)
+# p fibonacci_last(123456789)
