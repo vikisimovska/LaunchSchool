@@ -18,5 +18,5 @@ the last full measure of devotion -- that we here highly
 resolve that these dead shall not have died in vain
 -- that this nation, under God, shall have a new birth
 of freedom -- and that government of the people, by
-the people, for the people, shall not perish from the
+the people, for  the people, shall not perish from the
 earth. "
