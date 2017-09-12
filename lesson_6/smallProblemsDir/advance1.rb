@@ -197,3 +197,103 @@ def madlibs(file)
   p madlibs.join(' ')
 end
 #madlib(file_path)
+
+#2.Write a method that displays an 8-pointed star in an nxn grid, where n is an
+#odd integer that is supplied as an argument to the method. The smallest such
+#star you need to handle is a 7x7 grid.
+
+def star(n)
+  arr = []
+  1.upto(n/2) do |num|
+    arr << '#{ "*" + " "*(num-1) + '*' + " "* (num-1) + '*'}'.center(n)
+    #arr <<  output.center(n)
+  end
+  puts [arr.reverse, "*" * n, arr]
+end
+#OTHER SOLUTIONS
+def see_stars(num)
+  arr = []
+  (num / 2).times { |n|  arr << "*#{" " * n}*#{" " * n}*".center(num) }
+  puts [arr.reverse, "#{"*" * num}", arr]
+end
+#***************
+def star(num)
+  lines = (0...num / 2).map { |n| "#{('*' + ' ' * n) * 2}*".center(num) }
+  puts [lines.reverse, '*' * num, lines]
+end
+#***************
+def star(n)
+  puts (-(n / 2)..n / 2).map { |d| d.zero? ? '*' * n : "#{('*' + ' ' * (d.abs - 1)) * 2}*".center(n) }
+end
+#star(9)
+
+#3.The transpose of a 3 x 3 matrix is the matrix that results from exchanging the
+#columns and rows of the original matrix. Write a method that takes a 3 x 3 matrix
+#in Array of Arrays format and returns the transpose of the original matrix.
+
+#each grebs each one of the arrays separatly
+def transpose(matrix)
+  colum1, colum2, colum3 = [], [], []
+  matrix.each do |arr|
+    colum1 << arr[0]
+    colum2 << arr[1]
+    colum3 << arr[2]
+  end
+  [colum1, colum2, colum3]
+end
+#similar SOLUTION
+def transpose(matrix)
+  t1 = []
+  t2 = []
+  t3 = []
+  matrix.map do |a, b, c|
+    t1 << a
+    t2 << b
+    t3 << c
+  end
+  [t1, t2, t3]
+end
+#***********OTHER'S SOLUTIONS*************
+def transpose(matrix)
+  matrix.first.zip(*matrix.drop(1))
+end
+def transpose(arr)
+  arr.map.with_index { |_, idx| [arr[0][idx], arr[1][idx], arr[2][idx]] }
+end
+def transpose(matrix)
+  matrix.each_index.map { |idx| matrix.map { |row| row[idx] } }
+end
+def transpose(matrix)
+  (0..matrix.size - 1).map do |s|
+    (0..matrix.size - 1).map do |f|
+      matrix[f][s]
+    end
+  end
+end
+#further exploration
+def transpose!(arr)
+  clone = arr.dup
+  arr.map!.with_index { |_, idx| [clone[0][idx], clone[1][idx], clone[2][idx]] }
+end
+#********further exploration***************
+def transpose!(matrix)
+  matrix.each do |row|
+    matrix.size.times do |idx|
+      matrix[idx] << row.shift
+    end
+  end
+  matrix
+end
+#********SIMILAR***************************
+def transpose!(matrix)
+  matrix.each_with_index do |row, i|
+    i.times do |index|
+      row[index], matrix[index][i] = matrix[index][i], row[index]
+    end
+  end
+end
+
+# matrix = [[1, 5, 8], [4, 7, 2], [3, 9, 6]]
+# new_matrix = transpose(matrix)
+# p new_matrix == [[1, 4, 3], [5, 7, 9], [8, 2, 6]]
+# p matrix == [[1, 5, 8], [4, 7, 2], [3, 9, 6]]
